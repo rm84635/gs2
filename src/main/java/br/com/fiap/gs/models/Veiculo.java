@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.SequenceGenerator;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.OneToOne;
@@ -12,9 +15,8 @@ import javax.persistence.CascadeType;
 
 @Entity
 public class Veiculo {
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "veiculoSequence")
-	@SequenceGenerator(name = "veiculoSequence", sequenceName = "veiculoSequence")
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(nullable = false)

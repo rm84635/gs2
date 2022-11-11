@@ -7,11 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Ambiente {
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ambienteSequence")
-	@SequenceGenerator(name = "ambienteSequence", sequenceName = "ambienteSequence")
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(nullable = false)

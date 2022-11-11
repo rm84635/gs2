@@ -41,12 +41,7 @@ public class AmbienteController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Ambiente> salvar(@RequestBody Ambiente model){
-        Optional<Ambiente> modelExistente = repo.findById(model.getId());
-
-        if (modelExistente.isPresent()) {
-            return new ResponseEntity("Registro já existe", HttpStatus.BAD_REQUEST);
-        }
-
+        
         repo.save(model);
         return new ResponseEntity<Ambiente>(model, HttpStatus.CREATED);
     }

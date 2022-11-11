@@ -3,7 +3,6 @@ package br.com.fiap.gs.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.fiap.gs.models.Ambiente;
 import br.com.fiap.gs.models.Veiculo;
 import br.com.fiap.gs.repositories.VeiculoRepository;
 
@@ -42,12 +41,7 @@ public class VeiculoController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Veiculo> salvar(@RequestBody Veiculo model){
-        Optional<Veiculo> modelExistente = repo.findById(model.getId());
-
-        if (modelExistente.isPresent()) {
-            return new ResponseEntity("Registro já existe", HttpStatus.BAD_REQUEST);
-        }
-
+        
         repo.save(model);
         return new ResponseEntity<Veiculo>(model, HttpStatus.CREATED);
     }
