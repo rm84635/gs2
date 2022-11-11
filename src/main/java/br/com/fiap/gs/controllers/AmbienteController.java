@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 @RequestMapping("/ambiente")
@@ -48,5 +49,17 @@ public class AmbienteController {
 
         repo.save(model);
         return new ResponseEntity<Ambiente>(model, HttpStatus.CREATED);
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
+    	Optional<Ambiente> modelExistente = repo.findById(id);
+    	
+    	if (!modelExistente.isPresent()) {
+    		return new ResponseEntity("Registro não existe", HttpStatus.BAD_REQUEST);
+    	}
+    	
+    	repo.deleteById(id);
+    	return new ResponseEntity(Boolean.TRUE, HttpStatus.OK);
     }
 }
